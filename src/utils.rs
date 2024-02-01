@@ -35,3 +35,21 @@ pub fn print_menu(menu: [(&str, &str); 4]) {
         println!("{}) {}", key, value);
     }
 }
+
+pub fn print_character_details(name: &String, hp: u32, armor: f64, attack: f64) {
+    println!("┌─────────────┬─────┬───────┬────────┐");
+    println!("│    NAME     │ HP  │ ARMOR │ ATTACK │");
+    println!("├─────────────┼─────┼───────┼────────┤");
+    println!("│ {:<12}│ {:<4}│ {:<6}│ {:<6} │", name, hp, armor, attack);
+    println!("└─────────────┴─────┴───────┴────────┘");
+}
+
+pub fn print_fight_details(hero_name: &String, hero_hp: u32, hero_armor: f64, hero_attack: f64, 
+    enemy_name: &String, enemy_hp: u32, enemy_armor: f64, enemy_attack: f64) {
+    println!("┌─────────────┬─────┬───────┬────────┐       ┌─────────────┬─────┬───────┬────────┐");
+    println!("│    HERO     │ HP  │ ARMOR │ ATTACK │       │   ENEMY     │ HP  │ ARMOR │ ATTACK │");
+    println!("├─────────────┼─────┼───────┼────────┤  VS   ├─────────────┼─────┼───────┼────────┤");
+    println!("│ {:<12}│ {:<4}│ {:<6}│ {:<6} │       │ {:<12}│ {:<4}│ {:<6}│ {:<6} │", 
+    hero_name, hero_hp, hero_armor, hero_attack, enemy_name, enemy_hp, enemy_armor, enemy_attack);
+    println!("└─────────────┴─────┴───────┴────────┘       └─────────────┴─────┴───────┴────────┘");
+}
