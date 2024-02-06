@@ -1,12 +1,14 @@
 mod story;
 mod utils;
-use story::characters;
+use story::characters::hero::Hero;
+
+use rand::thread_rng;
+use rand::seq::SliceRandom;
 
 
 fn main() {
     let game_start = true;
-    let mut hero = characters::Hero::new("David".to_string(), 100, 5.0, 0.0, 0.0, 1);
-
+    let mut hero = Hero::new("David".to_string(), 100, 5, 10, 0.0, 1);
     utils::cls();
     println!("Hello and welcome to CODEIRA!");
     println!("This is a story of a young coder.");
@@ -31,11 +33,17 @@ fn main() {
                 // Explore
                 if base_choice == "1" {
                     utils::cls();
+                    let mut rng = thread_rng();
                     // let user_location = story::select_location();
                     // let location = utils::parse_location(user_location);
                     // let location = utils::parse_location(user_location);
                     let random_action = story::Action::weighted_random_action();
-                    story::random_action(&random_action, &mut hero);
+                    let mut enemies = story::characters::generate_enemies(&hero);
+                    if let Some(enemy) = enemies.choose_mut(&mut rng) {
+                        story::random_action(&random_action, &mut hero, enemy);
+                    } else {
+                        println!("No enemy selected")
+                    }
                 
                 // Inventory
                 } else if base_choice == "2" {

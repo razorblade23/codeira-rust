@@ -1,13 +1,11 @@
 pub mod locations;
 pub mod characters;
-use locations::Location;
 use rand::prelude::*;
 use std::io;
 
-use crate::utils::{self, print_menu};
+use crate::utils;
 
-use self::characters::Hero;
-use self::characters::simulate_fight;
+use crate::story::characters::{ hero::Hero, enemy::Enemy, battle::Battle };
 
 #[derive(Debug)]
 pub enum Action {
@@ -104,12 +102,12 @@ pub fn select_location() -> String {
     return user_choice.to_string()
 }
 
-pub fn random_action(action: &Action, hero: &mut Hero) {
+pub fn random_action(action: &Action, hero: &mut Hero, enemy: &mut Enemy) {
     match action {
         Action::Fight => {
-            let mut enemy = characters::Enemy::new(String::from("Skeleton"), 20, 1.0, 5.0);
             println!("Hero encounters Enemy");
-            simulate_fight(hero, &mut enemy);
+            let mut battle = Battle::new(hero, enemy);
+            battle.simulate_fight();
             println!("Not implemented yet ...");
             utils::slp(10);
             }

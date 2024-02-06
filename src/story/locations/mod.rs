@@ -1,9 +1,14 @@
-#[derive(Clone)]
+use crate::story::characters::enemy::Enemy;
+
 #[derive(Debug)]
-pub enum Location {
-    Home ,
-    Woods{exp_boost: u32},
-    Mountains{exp_boost: u32},
-    Riverside{exp_boost: u32},
-    Ocean{exp_boost: u32}
+pub struct Location {
+    name: String,
+    exp_boost: u32,
+    enemies: Vec<Enemy>
+}
+
+impl Location {
+    pub fn new(name: String, exp_boost: u32, enemies: Vec<Enemy>) -> Location {
+        Location {name, exp_boost, enemies}
+    }
 }
